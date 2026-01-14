@@ -6,6 +6,8 @@ Cellmonicは、ライフゲームとラングトンのアリを融合させた�
 
 **Cellmonic** is a generative MIDI sequencer that creates music using a hybrid simulation of **Conway's Game of Life** and **Langton's Ant**, mapped onto a harmonic spiral grid.
 
+ProtoPedia → https://protopedia.net/prototype/8046
+
 ## コンセプト / Concept
 
 ライフゲームを利用したシンセサイザーの制作において、「ライフゲーム単体ではパターンが早期に収束・固定化してしまい、初期状態以降の不確実性（予測不可能性）が維持されない」という課題がありました。
