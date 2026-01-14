@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Sparkles, RefreshCw, Library, GripHorizontal, Save, X } from 'lucide-react';
-import { SectionLabel, Separator, PanelContainer } from '../components.SharedUI';
+import { Library, GripHorizontal, Save, X } from 'lucide-react';
+import { SectionLabel, PanelContainer } from '../components.SharedUI';
 import { Preset } from '../types';
-import { GoogleGenAI, Type } from "@google/genai";
 
 interface LibraryPanelProps {
     memos: Preset[];
@@ -34,8 +33,6 @@ const LibraryPanel: React.FC<LibraryPanelProps> = ({
     setGridSize, setCenterNote, setBpm, setAntCount, setRuleString
 }) => {
     
-    const [geminiPrompt, setGeminiPrompt] = useState("");
-    const [isGenerating, setIsGenerating] = useState(false);
     const [dragOverMemo, setDragOverMemo] = useState(false);
 
     const applyPreset = (p: Preset) => {
@@ -44,52 +41,6 @@ const LibraryPanel: React.FC<LibraryPanelProps> = ({
         setBpm(p.bpm);
         setAntCount(p.ants);
         setRuleString(p.rule);
-    };
-
-    const handleGenerate = async () => {
-        if (!geminiPrompt.trim()) return;
-        setIsGenerating(true);
-    
-        try {
-            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-            const response = await ai.models.generateContent({
-                model: "gemini-2.5-flash-preview",
-                contents: `Generate a JSON configuration for a musical Cellular Automata (Game of Life variant) app based on this description: "${geminiPrompt}". 
-                
-                Parameters:
-                - size: integer (grid size, min 3, recommended 5-21)
-                - center: integer (midi note center, 0-127)
-                - bpm: integer (speed)
-                - ants: integer (number of Langton's ants)
-                - rule: string (format "Survival/Birth" e.g., "23/3" or "34678/3678")
-                
-                Ensure the configuration creates an interesting musical and visual pattern matching the description.`,
-                config: {
-                    responseMimeType: "application/json",
-                    responseSchema: {
-                        type: Type.OBJECT,
-                        properties: {
-                            size: { type: Type.INTEGER },
-                            center: { type: Type.INTEGER },
-                            bpm: { type: Type.INTEGER },
-                            ants: { type: Type.INTEGER },
-                            rule: { type: Type.STRING }
-                        },
-                        required: ["size", "center", "bpm", "ants", "rule"]
-                    }
-                }
-            });
-    
-            if (response.text) {
-                const data = JSON.parse(response.text);
-                applyPreset({ ...data, name: "AI Generated" });
-            }
-        } catch (e) {
-            console.error("Gemini Error:", e);
-            alert("Failed to generate preset. Please try again.");
-        } finally {
-            setIsGenerating(false);
-        }
     };
 
     // D&D Logic
@@ -133,28 +84,6 @@ const LibraryPanel: React.FC<LibraryPanelProps> = ({
 
     return (
         <PanelContainer>
-            <div>
-                 <SectionLabel icon={Sparkles} label="Gemini Generator" />
-                 <div className="flex gap-2">
-                    <input 
-                        type="text" 
-                        value={geminiPrompt}
-                        onChange={(e) => setGeminiPrompt(e.target.value)}
-                        placeholder="e.g. 'Chaotic fast noise'"
-                        className="flex-1 bg-black/50 border border-purple-900/50 focus:border-purple-500 rounded p-2 text-xs text-white outline-none"
-                    />
-                    <button 
-                        onClick={handleGenerate}
-                        disabled={isGenerating || !geminiPrompt}
-                        className="bg-purple-700 hover:bg-purple-600 disabled:opacity-50 text-white p-2 rounded flex items-center justify-center min-w-[32px]"
-                    >
-                        {isGenerating ? <RefreshCw size={14} className="animate-spin"/> : <Sparkles size={14}/>}
-                    </button>
-                 </div>
-            </div>
-
-            <Separator />
-
             <div>
                  <div className="flex justify-between items-center mb-2">
                     <SectionLabel icon={Library} label="Presets & Memos" />
