@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Library, GripHorizontal, Save, X } from 'lucide-react';
-import { SectionLabel, PanelContainer } from '../components.SharedUI';
-import { Preset } from '../types';
+import { SectionLabel, PanelContainer } from './components.SharedUI';
+import { Preset } from './types';
 
 interface LibraryPanelProps {
     memos: Preset[];

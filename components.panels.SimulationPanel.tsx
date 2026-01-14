@@ -1,7 +1,7 @@
 import React from 'react';
 import { Play, Pause, RefreshCw, Trash2, Activity, Smartphone, Minus, Plus, Grid3X3 } from 'lucide-react';
-import { SectionLabel, Separator, PanelContainer } from '../components.SharedUI';
-import { parseRule } from '../utils.spiral';
+import { SectionLabel, Separator, PanelContainer } from './components.SharedUI';
+import { parseRule } from './utils.spiral';
 
 interface SimulationPanelProps {
   isPlaying: boolean;

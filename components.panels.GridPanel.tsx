@@ -1,7 +1,7 @@
 import React from 'react';
 import { Settings, Grid3X3, Music, Zap } from 'lucide-react';
-import { SectionLabel, Separator, PanelContainer } from '../components.SharedUI';
-import { MidiDevice, InitMode } from '../types';
+import { SectionLabel, Separator, PanelContainer } from './components.SharedUI';
+import { MidiDevice, InitMode } from './types';
 
 interface GridPanelProps {
   gridSize: number;

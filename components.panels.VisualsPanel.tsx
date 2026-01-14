@@ -1,8 +1,8 @@
 import React from 'react';
-import { Eye, Palette, Grid3X3, Layers, Type, Zap, Monitor, Sparkles, Box, Activity, RotateCcw, ZoomIn, Video } from 'lucide-react';
-import { SectionLabel, PanelContainer, Separator } from '../components.SharedUI';
-import { VisualSettings, VisualTweaks } from '../types';
-import { getColorHex } from '../utils.spiral';
+import { Eye, Palette, Grid3X3, Layers, Type, Zap, Monitor, Sparkles, Box, Settings, Video, ZoomIn, RotateCcw, Activity } from 'lucide-react';
+import { SectionLabel, PanelContainer, Separator } from './components.SharedUI';
+import { VisualSettings } from './types';
+import { getColorHex } from './utils.spiral';
 
 interface VisualsPanelProps {
   visualSettings: VisualSettings;
@@ -319,6 +319,5 @@ const ModeButton = ({ mode, current, icon, onClick }: { mode: string, current: s
 );
 
 const SettingsSlider = () => <Settings size={12} />;
-import { Settings } from 'lucide-react';
 
 export default VisualsPanel;
