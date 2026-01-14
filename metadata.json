@@ -1,0 +1,5 @@
+{
+  "name": "Cellmonic",
+  "description": "A generative MIDI sequencer based on a hybrid of Conway's Game of Life and Langton's Ant, mapped onto a consonant harmonic grid.",
+  "requestFramePermissions": []
+}
