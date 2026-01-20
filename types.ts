@@ -47,6 +47,7 @@ export interface Preset {
   bpm: number;
   ants: number;
   rule: string;
+  id?: number;
 }
 
 export type NoteLabelType = 'midi' | 'pitch' | 'none';
